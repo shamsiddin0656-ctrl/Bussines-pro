@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="tg">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#07162d"><title>SHAMSIDIN BUSINESS PRO</title>
+<style>
+:root{--navy:#07162d;--navy2:#10294a;--gold:#f5c84c;--muted:#9fb1c8;--line:#294363;--card:#102442;--bg:#061226}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(150deg,#07162d,#0b1d37 55%,#071226);color:#f4f7fc;font:15px system-ui,-apple-system,Segoe UI,sans-serif}
+header{padding:18px 16px 14px;border-bottom:1px solid var(--line);background:#07162df2;position:sticky;top:0;z-index:4}
+.brand{font-weight:900;letter-spacing:.8px;font-size:22px}.brand span{color:var(--gold)}.sub{color:var(--muted);font-size:12px;margin-top:3px}.status{float:right;border:1px solid #1fbd76;color:#6ce5a8;border-radius:20px;padding:5px 10px;font-size:11px}
+main{max-width:760px;margin:auto;padding:14px 13px 90px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.card{background:linear-gradient(145deg,#142d50,#0d203b);border:1px solid var(--line);border-radius:16px;padding:14px;box-shadow:0 7px 20px #0002}.metric small{color:var(--muted)}.metric strong{display:block;color:var(--gold);font-size:21px;margin-top:5px;overflow-wrap:anywhere}
+h2{font-size:19px;margin:18px 2px 10px}h3{font-size:15px;margin:0 0 10px}.muted{color:var(--muted);font-size:12px}.tiles button{min-height:85px;text-align:left;font-weight:700;font-size:15px}
+button,.btn{border:0;border-radius:12px;padding:12px 14px;background:linear-gradient(135deg,#1765c7,#0e438e);color:white;font-weight:700;cursor:pointer}button.gold{background:linear-gradient(135deg,#f5d46a,#b98516);color:#18243a}button.ghost{background:#182f4f;border:1px solid var(--line)}button.danger{background:#9c2e37}
+nav{position:fixed;bottom:0;left:0;right:0;background:#07162df5;border-top:1px solid var(--line);display:flex;justify-content:space-around;padding:8px 4px calc(8px + env(safe-area-inset-bottom));z-index:5}
+nav button{background:transparent;color:#b8c7da;padding:8px 5px;font-size:11px;flex:1}nav button.active{color:var(--gold);background:#183354}
+section{display:none}section.active{display:block}
+label{display:block;color:#c5d2e2;font-size:12px;margin:10px 0 5px}input,select{width:100%;padding:12px;border-radius:10px;border:1px solid var(--line);background:#081a32;color:white;font:inherit}
+.row{display:flex;gap:8px}.row>*{flex:1;min-width:0}.formcard{margin-top:12px}.list{display:grid;gap:8px;margin-top:10px}.item{background:#0c203b;border:1px solid var(--line);padding:11px;border-radius:12px;display:flex;justify-content:space-between;gap:10px}.item b{color:var(--gold)}.pill{font-size:10px;color:#9ed9bb;border:1px solid #28694e;padding:3px 7px;border-radius:20px}
+table{width:100%;border-collapse:collapse;font-size:12px}td,th{padding:9px 6px;border-bottom:1px solid var(--line);text-align:left}th{color:var(--muted)}
+.notice{background:#332b16;border:1px solid #80672c;color:#f6dfa0;border-radius:12px;padding:11px;font-size:12px;margin:12px 0}
+#lock{position:fixed;inset:0;background:#061226;z-index:20;display:flex;align-items:center;justify-content:center;padding:22px}#lock .box{width:min(360px,100%);text-align:center}#lock h1{color:var(--gold)}#lock input{text-align:center;font-size:24px;letter-spacing:8px}
+@media(min-width:600px){.grid{grid-template-columns:repeat(4,1fr)}}
+</style></head>
+<body>
+<div id="lock"><div class="box card"><div style="font-size:40px">👑</div><h1>SHAMSIDIN BUSINESS PRO</h1><p class="muted" id="lockmsg">PIN-коди 4-рақамаро ворид кунед</p><input id="pin" type="password" inputmode="numeric" maxlength="4" placeholder="••••"><button class="gold" style="width:100%;margin-top:12px" onclick="unlock()">Кушодан</button><p class="muted">Бори аввал PIN-и нав интихоб кунед.</p></div></div>
+<header><span class="status">● БЕ ИНТЕРНЕТ</span><div class="brand">SHAMSIDIN <span>BUSINESS PRO</span></div><div class="sub">Панели идоракунии тиҷорат · офлайн</div></header>
+<main>
+<section id="home" class="active">
+ <div class="grid">
+  <div class="card metric"><small>Қарзи боқимонда</small><strong id="mDebt">0 с.</strong></div>
+  <div class="card metric"><small>Қарздиҳандагон</small><strong id="mPeople">0 / 70</strong></div>
+  <div class="card metric"><small>Фурӯши имрӯз</small><strong id="mSales">0 с.</strong></div>
+  <div class="card metric"><small>Хароҷоти имрӯз</small><strong id="mExpense">0 с.</strong></div>
+ </div>
+ <h2>Қисмҳои барнома</h2><div class="grid tiles">
+ <button onclick="show('sales')">🛒 Фурӯш<br><span class="muted">Сабти мол ё маблағи умумӣ</span></button>
+ <button onclick="show('debts')">👥 Қарзҳо<br><span class="muted">То 70 қарздиҳанда</span></button>
+ <button onclick="show('stock')">📦 Анбор<br><span class="muted">Анбори умумӣ ва тақсимот</span></button>
+ <button onclick="show('expenses')">💳 Хароҷот<br><span class="muted">Хароҷоти нуқтаҳо</span></button>
+ <button onclick="show('reports')">📊 Ҳисобот<br><span class="muted">Ҷамъбасти сабтҳо</span></button>
+ <button onclick="show('backup')">📁 Нусхаи эҳтиётӣ<br><span class="muted">CSV ва чоп/PDF</span></button></div>
+ <div class="notice">Муҳим: маълумот дар ҳамин браузер/телефон нигоҳ дошта мешавад. Барои муҳофизат, мунтазам нусхаи эҳтиётӣ гиред.</div>
+</section>
+<section id="sales">
+<h2>Фурӯш</h2><div class="card formcard">
+<label>Нуқтаи савдо</label><select id="salePoint"><option>Мағозаи асосӣ</option><option>Бозори якум</option><option>Бозори дуюм</option></select>
+<label>Усули сабт</label><select id="saleMode" onchange="toggleProduct()"><option value="total">Маблағи умумии рӯз</option><option value="item">Ҳар як мол алоҳида</option></select>
+<div id="totalFields"><label>Маблағи фурӯш (сомонӣ)</label><input id="saleTotal" type="number" min="0" placeholder="Масалан 15000"></div>
+<div id="itemFields" style="display:none"><label>Номи мол</label><input id="productName" placeholder="Номи мол"><div class="row"><div><label>Миқдор</label><input id="productQty" type="number" min="0" placeholder="1"></div><div><label>Нархи фурӯш</label><input id="productPrice" type="number" min="0" placeholder="0"></div></div></div>
+<button class="gold" style="width:100%;margin-top:14px" onclick="addSale()">Сабти фурӯш</button></div><div id="salesList" class="list"></div>
+</section>
+<section id="debts">
+<h2>Қарздиҳандагон · то 70 нафар</h2><div class="card">
+<label>Номи қарздиҳанда</label><input id="creditor" placeholder="Ном ва насаб"><div class="row"><div><label>Асъор</label><select id="debtCurrency"><option>сомонӣ</option><option>доллар</option></select></div><div><label>Қарзи кӯҳна</label><input id="oldDebt" type="number" min="0" placeholder="0"></div></div>
+<label>Қарзи нав</label><input id="newDebt" type="number" min="0" placeholder="0">
+<label>Пардохти ҳозира</label><input id="paidDebt" type="number" min="0" placeholder="0">
+<label>Телефон (ихтиёрӣ)</label><input id="creditPhone" placeholder="Рақами телефон">
+<button class="gold" style="width:100%;margin-top:14px" onclick="addDebt()">Илова / сабти қарз</button></div><div id="debtList" class="list"></div>
+</section>
+<section id="stock">
+<h2>Анбори умумӣ</h2><div class="card"><label>Номи мол</label><input id="stockName" placeholder="Масалан орд"><div class="row"><div><label>Миқдор</label><input id="stockQty" type="number" placeholder="0"></div><div><label>Арзиши умумӣ (сомонӣ)</label><input id="stockCost" type="number" placeholder="0"></div></div><button class="gold" style="width:100%;margin-top:14px" onclick="addStock()">Илова ба анбор</button></div><h2>Тақсимоти мол</h2><div class="card"><label>Мол</label><select id="transferProduct"></select><label>Ба кадом нуқта</label><select id="transferPoint"><option>Мағозаи асосӣ</option><option>Бозори якум</option><option>Бозори дуюм</option></select><label>Миқдор</label><input id="transferQty" type="number" placeholder="0"><button style="width:100%;margin-top:12px" onclick="transferStock()">Сабти тақсимот</button></div><div id="stockList" class="list"></div>
+</section>
+<section id="expenses">
+<h2>Хароҷот</h2><div class="card"><label>Нуқтаи савдо</label><select id="expPoint"><option>Мағозаи асосӣ</option><option>Бозори якум</option><option>Бозори дуюм</option><option>Умумӣ</option></select><label>Навъи хароҷот</label><input id="expName" placeholder="Маош, роҳкиро, иҷора..."><label>Маблағ (сомонӣ)</label><input id="expAmount" type="number" placeholder="0"><button class="gold" style="width:100%;margin-top:14px" onclick="addExpense()">Сабти хароҷот</button></div><div id="expenseList" class="list"></div>
+</section>
+<section id="reports"><h2>Ҳисобот</h2><div class="grid"><div class="card metric"><small>Ҳамаи фурӯш</small><strong id="rSales">0</strong></div><div class="card metric"><small>Ҳамаи хароҷот</small><strong id="rExp">0</strong></div><div class="card metric"><small>Қарзи сомонӣ</small><strong id="rSom">0</strong></div><div class="card metric"><small>Қарзи доллар</small><strong id="rUsd">0</strong></div></div><div class="notice">Фоидаи соф танҳо баъд аз ворид кардани арзиши аслии мол ва ҳамаи хароҷот дуруст ҳисоб мешавад. Фурӯш худ аз худ фоида нест.</div><div class="card"><h3>Фурӯш аз рӯи нуқта</h3><div id="pointReport"></div></div></section>
+<section id="backup"><h2>Нусхаи эҳтиётӣ</h2><div class="card"><p class="muted">Файлҳоро ба хотираи телефон нигоҳ доред. CSV-ро бо Excel кушодан мумкин аст.</p><button class="gold" style="width:100%;margin:6px 0" onclick="exportCSV()">⬇ Ҳисобот барои Excel (CSV)</button><button style="width:100%;margin:6px 0" onclick="exportData()">⬇ Нусхаи эҳтиётӣ (JSON)</button><button style="width:100%;margin:6px 0" onclick="window.print()">🖨 Чоп кардан / нигоҳ доштан ҳамчун PDF</button><label>Барқарор кардани нусхаи CSV</label><input id="restoreFile" type="file" accept=".json,application/json"><button class="ghost" style="width:100%;margin-top:10px" onclick="restoreData()">Барқарор кардан</button><div class="notice">Барқароркунӣ маълумоти ҷориро иваз мекунад. Пеш аз он нусхаи эҳтиётӣ гиред.</div></div></section>
+<section id="settings"><h2>Танзимот</h2><div class="card"><label>Тағйир додани PIN-код (4 рақам)</label><input id="newPin" type="password" inputmode="numeric" maxlength="4" placeholder="PIN-и нав"><button class="gold" style="width:100%;margin-top:12px" onclick="changePin()">Иваз кардани PIN</button><p class="muted">PIN-и худро фаромӯш накунед. Ин намунаи маҳаллӣ рамзгузории дараҷаи бонкиро таъмин намекунад.</p></div></section>
+</main>
+<nav><button class="active" data-tab="home" onclick="show('home')">⌂<br>Асосӣ</button><button data-tab="sales" onclick="show('sales')">＋<br>Фурӯш</button><button data-tab="debts" onclick="show('debts')">♧<br>Қарзҳо</button><button data-tab="reports" onclick="show('reports')">▥<br>Ҳисобот</button><button data-tab="settings" onclick="show('settings')">⚙<br>Танзимот</button></nav>
+<script>
+const KEY='sbpro_data_v1', PINKEY='sbpro_pin_v1';
+let data=JSON.parse(localStorage.getItem(KEY)||'{"sales":[],"debts":[],"stock":[],"expenses":[],"transfers":[]}');
+let pin=localStorage.getItem(PINKEY);
+const save=()=>{localStorage.setItem(KEY,JSON.stringify(data));render()};
+const n=id=>Number(document.getElementById(id).value||0);
+const money=x=>Number(x||0).toLocaleString('en-US',{maximumFractionDigits:2});
+function unlock(){let v=document.getElementById('pin').value;if(!/^\d{4}$/.test(v)){alert('PIN бояд 4 рақам бошад');return}if(!pin){localStorage.setItem(PINKEY,v);pin=v}else if(v!==pin){document.getElementById('lockmsg').textContent='PIN нодуруст аст. Дубора кӯшиш кунед.';return}document.getElementById('lock').style.display='none'}
+function show(id){document.querySelectorAll('main section').forEach(s=>s.classList.toggle('active',s.id===id));document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('active',b.dataset.tab===id));render()}
+function toggleProduct(){let item=document.getElementById('saleMode').value==='item';document.getElementById('itemFields').style.display=item?'block':'none';document.getElementById('totalFields').style.display=item?'none':'block'}
+function addSale(){let mode=document.getElementById('saleMode').value,amount=mode==='item'?n('productQty')*n('productPrice'):n('saleTotal');if(amount<=0)return alert('Маблағро дуруст ворид кунед');data.sales.push({date:new Date().toISOString(),point:document.getElementById('salePoint').value,mode,name:document.getElementById('productName').value,qty:n('productQty'),amount});['saleTotal','productName','productQty','productPrice'].forEach(x=>document.getElementById(x).value='');save();alert('Фурӯш сабт шуд')}
+function addDebt(){let name=document.getElementById('creditor').value.trim(),cur=document.getElementById('debtCurrency').value,old=n('oldDebt'),fresh=n('newDebt'),paid=n('paidDebt');if(!name||old+fresh<=0)return alert('Ном ва маблағи қарзро ворид кунед');if(data.debts.length>=70&&!data.debts.some(x=>x.name===name&&x.cur===cur))return alert('Ҳадди 70 қарздиҳанда пур шуд');let d=data.debts.find(x=>x.name===name&&x.cur===cur);if(!d){d={name,cur,old:0,fresh:0,paid:0,phone:document.getElementById('creditPhone').value};data.debts.push(d)}d.old+=old;d.fresh+=fresh;d.paid+=paid;d.balance=d.old+d.fresh-d.paid;['creditor','oldDebt','newDebt','paidDebt','creditPhone'].forEach(x=>document.getElementById(x).value='');save()}
+function addStock(){let name=document.getElementById('stockName').value.trim(),qty=n('stockQty'),cost=n('stockCost');if(!name||qty<=0)return alert('Номи мол ва миқдорро ворид кунед');let p=data.stock.find(x=>x.name===name);if(p){p.qty+=qty;p.cost+=cost}else data.stock.push({name,qty,cost,allocated:{}});document.getElementById('stockName').value='';document.getElementById('stockQty').value='';document.getElementById('stockCost').value='';save()}
+function transferStock(){let p=data.stock[Number(document.getElementById('transferProduct').value)],q=n('transferQty'),point=document.getElementById('transferPoint').value;if(!p||q<=0||q>p.qty)return alert('Мол ё миқдор нодуруст аст');p.qty-=q;p.allocated[point]=(p.allocated[point]||0)+q;data.transfers.push({date:new Date().toISOString(),name:p.name,qty:q,point});document.getElementById('transferQty').value='';save()}
+function addExpense(){let name=document.getElementById('expName').value.trim(),amount=n('expAmount');if(!name||amount<=0)return alert('Навъ ва маблағи хароҷотро ворид кунед');data.expenses.push({date:new Date().toISOString(),point:document.getElementById('expPoint').value,name,amount});document.getElementById('expName').value='';document.getElementById('expAmount').value='';save()}
+function changePin(){let v=document.getElementById('newPin').value;if(!/^\d{4}$/.test(v))return alert('PIN бояд 4 рақам бошад');localStorage.setItem(PINKEY,v);pin=v;document.getElementById('newPin').value='';alert('PIN иваз шуд')}
+function render(){let som=data.debts.filter(x=>x.cur==='сомонӣ').reduce((s,x)=>s+Math.max(0,x.balance??x.old+x.fresh-x.paid),0),usd=data.debts.filter(x=>x.cur==='доллар').reduce((s,x)=>s+Math.max(0,x.balance??x.old+x.fresh-x.paid),0);let today=new Date().toDateString(),salesToday=data.sales.filter(x=>new Date(x.date).toDateString()===today).reduce((s,x)=>s+x.amount,0),expToday=data.expenses.filter(x=>new Date(x.date).toDateString()===today).reduce((s,x)=>s+x.amount,0);
+document.getElementById('mDebt').textContent=money(som)+' с.';document.getElementById('mPeople').textContent=data.debts.length+' / 70';document.getElementById('mSales').textContent=money(salesToday)+' с.';document.getElementById('mExpense').textContent=money(expToday)+' с.';
+document.getElementById('salesList').innerHTML=data.sales.slice().reverse().slice(0,30).map(x=>`<div class="item"><span>${x.point}<br><small class="muted">${new Date(x.date).toLocaleString('tg-TJ')}</small></span><b>${money(x.amount)} с.</b></div>`).join('');
+document.getElementById('debtList').innerHTML=data.debts.map(x=>`<div class="item"><span>${x.name}<br><small class="muted">${x.cur} · кӯҳна ${money(x.old)} + нав ${money(x.fresh)} − пардохт ${money(x.paid)}</small></span><b>${money(Math.max(0,x.balance??x.old+x.fresh-x.paid))}</b></div>`).join('');
+document.getElementById('stockList').innerHTML=data.stock.map(x=>`<div class="item"><span>${x.name}<br><small class="muted">${Object.entries(x.allocated||{}).map(([k,v])=>k+': '+v).join(' · ')}</small></span><b>${x.qty} дона</b></div>`).join('');
+document.getElementById('expenseList').innerHTML=data.expenses.slice().reverse().slice(0,30).map(x=>`<div class="item"><span>${x.name} · ${x.point}<br><small class="muted">${new Date(x.date).toLocaleDateString('tg-TJ')}</small></span><b>${money(x.amount)} с.</b></div>`).join('');
+document.getElementById('transferProduct').innerHTML=data.stock.map((x,i)=>`<option value="${i}">${x.name} (${x.qty})</option>`).join('');
+let ts=data.sales.reduce((s,x)=>s+x.amount,0),te=data.expenses.reduce((s,x)=>s+x.amount,0);document.getElementById('rSales').textContent=money(ts)+' с.';document.getElementById('rExp').textContent=money(te)+' с.';document.getElementById('rSom').textContent=money(som)+' с.';document.getElementById('rUsd').textContent=money(usd)+' $';
+document.getElementById('pointReport').innerHTML=['Мағозаи асосӣ','Бозори якум','Бозори дуюм'].map(p=>`<div class="item"><span>${p}</span><b>${money(data.sales.filter(x=>x.point===p).reduce((s,x)=>s+x.amount,0))} с.</b></div>`).join('');
+}
+function exportData(){let blob=new Blob(['\ufeff'+JSON.stringify(data,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='shamsidin-business-backup.json';a.click();URL.revokeObjectURL(a.href)}
+function restoreData(){let f=document.getElementById('restoreFile').files[0];if(!f)return alert('Аввал файли эҳтиётиро интихоб кунед');let r=new FileReader();r.onload=()=>{try{let x=JSON.parse(r.result);if(!x.sales||!x.debts||!x.stock||!x.expenses)throw 0;data=x;save();alert('Маълумот барқарор шуд')}catch(e){alert('Файли эҳтиётӣ нодуруст аст')}};r.readAsText(f)}
+render();
+</script></body></html>
