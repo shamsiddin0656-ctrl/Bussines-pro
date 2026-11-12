@@ -1,0 +1,62 @@
+
+name: Build SHAMSIDIN BUSINESS PRO APK
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Prepare Android folders
+        run: |
+          mkdir -p app/src/main/assets
+          mkdir -p app/src/main/java/tj/shamsidin/businesspro
+          cp index.html app/src/main/assets/index.html
+          cp MainActivity.java app/src/main/java/tj/shamsidin/businesspro/MainActivity.java
+          cp AndroidManifest.xml app/src/main/AndroidManifest.xml
+
+      - name: Create app build file
+        run: |
+          cat > app/build.gradle <<'EOF'
+          plugins {
+              id 'com.android.application'
+          }
+
+          android {
+              namespace 'tj.shamsidin.businesspro'
+              compileSdk 35
+
+              defaultConfig {
+                  applicationId 'tj.shamsidin.businesspro'
+                  minSdk 23
+                  targetSdk 28
+                  versionCode 1
+                  versionName '1.0'
+              }
+          }
+          EOF
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.9'
+
+      - name: Build APK
+        run: gradle assembleDebug
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: SHAMSIDIN-BUSINESS-PRO-APK
+          path: app/build/outputs/apk/debug/app-debug.apk
